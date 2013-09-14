@@ -18,21 +18,20 @@
             android:layout_centerHorizontal="true"
             android:visibility="invisible"/>
 
-    <ScrollView
+    <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/scrollView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:id="@+id/resultsList"
+            android:layout_below="@+id/searchHeading"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/searchHeading"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:scrollbars="none">
+            android:padding="10dp"
+            android:layout_alignRight="@+id/resultsList"/>
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/resultsLayout">
-        </LinearLayout>
-    </ScrollView>
 </RelativeLayout>

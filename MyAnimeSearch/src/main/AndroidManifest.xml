@@ -8,34 +8,52 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="11" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".ImageLoaderApplication">
         <activity
             android:name="uguu.gao.wafu.myanimesearch.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable"
-                       android:value=".MainActivity" />
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".MainActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                       android:resource="@xml/searchable"/>
 
-
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-
+        <activity
+            android:name="uguu.gao.wafu.myanimesearch.AnimeResultListActivity"
+            android:label="@string/title_activity_result_list"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name="uguu.gao.wafu.myanimesearch.CharResultListActivity"
+            android:label="@string/title_activity_result_list"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name="uguu.gao.wafu.myanimesearch.PeopleResultListActivity"
+            android:label="@string/title_activity_result_list"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -164,8 +164,14 @@ public class MainActivity extends Activity {
             v.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
-                    Intent intent = new Intent(getContext(), ResultListActivity.class);
-                    intent.putExtra("type", rc.getType());
+                    Intent intent = null;
+                    if (rc.getType().equals("Anime")) {
+                        intent = new Intent(getContext(), AnimeResultListActivity.class);
+                    } else if (rc.getType().equals("Characters")) {
+                        intent = new Intent(getContext(), CharResultListActivity.class);
+                    } else if (rc.getType().equals("People")) {
+                        intent = new Intent(getContext(), PeopleResultListActivity.class);
+                    }
                     startActivity(intent);
                     return false;
                 }

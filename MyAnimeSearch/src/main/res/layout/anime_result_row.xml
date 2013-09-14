@@ -1,0 +1,26 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/animeTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/animeImage"
+        android:layout_alignBottom="@+id/animeImage"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="@dimen/results_thumb_width"
+        android:layout_height="@dimen/results_thumb_height"
+        android:id="@+id/animeImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="#010101" />
+</RelativeLayout>
