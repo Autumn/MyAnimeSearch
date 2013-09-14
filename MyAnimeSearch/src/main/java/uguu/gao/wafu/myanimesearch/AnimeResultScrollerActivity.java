@@ -1,16 +1,15 @@
 package uguu.gao.wafu.myanimesearch;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -21,29 +20,32 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import java.util.ArrayList;
 
 import uguu.gao.wafu.javaMAL.AnimeSearchResult;
-import uguu.gao.wafu.javaMAL.CharacterSearchResult;
-import uguu.gao.wafu.javaMAL.PeopleSearchResult;
 
-public class AnimeResultListActivity extends ListActivity {
+/**
+ * Created by aki on 14/09/13.
+ */
+public class AnimeResultScrollerActivity extends Activity {
 
     AnimeResultsAdapter animeAdapter = null;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resultlist);
+        setContentView(R.layout.activity_results_horiz);
+
         Searcher searcher = Searcher.instanceOf();
         animeAdapter = new AnimeResultsAdapter(getApplicationContext(),
-                    R.layout.anime_result_row, searcher.getAnimeSearchResults());
-        setListAdapter(animeAdapter);
-    }
+                R.layout.anime_result_row, searcher.getAnimeSearchResults());
 
+        HorizontalScrollView scrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollView);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.result_list, menu);
-        return true;
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+        for (int i = 0; i < animeAdapter.getCount(); i++) {
+            linearLayout.addView(animeAdapter.getView(i, null, null));
+        }
+
+        scrollView.addView(linearLayout);
     }
 
     protected class AnimeResultsAdapter extends ArrayAdapter<AnimeSearchResult> {
@@ -65,7 +67,7 @@ public class AnimeResultListActivity extends ListActivity {
                 v = vi.inflate(R.layout.anime_result_row, null);
             }
 
-            final AnimeSearchResult anime = results.get(position);
+            AnimeSearchResult anime = results.get(position);
             TextView title = (TextView) v.findViewById(R.id.animeTitle);
             title.setText(anime.getTitle());
 
@@ -84,17 +86,9 @@ public class AnimeResultListActivity extends ListActivity {
             /*TextView airingDates = (TextView) v.findViewById(R.id.animeDate);
             airingDates.setText(anime.getStartDate() + " - " + anime.getEndDate());*/
 
-            v.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    Intent intent = new Intent(cxt, AnimeSingleResultActivity.class);
-                    intent.putExtra("id", anime.getId());
-                    startActivity(intent);
-                    return false;
-                }
-            });
 
             return v;
         }
     }
+
 }

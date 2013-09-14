@@ -54,6 +54,8 @@
             android:label="@string/title_activity_result_list"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".AnimeResultScrollerActivity" />
+        <activity android:name=".AnimeSingleResultActivity" />
     </application>
 
 </manifest>
