@@ -501,7 +501,7 @@ public class AnimeResult extends Anime {
         this.characters = characters;
     }
 
-    public People[] getStaff() {
+    public StaffEmbedded[] getStaff() {
         return staff;
     }
 

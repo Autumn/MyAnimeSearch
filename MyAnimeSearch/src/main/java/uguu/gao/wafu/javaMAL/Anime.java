@@ -76,7 +76,7 @@ public abstract class Anime {
         }
     }
 
-    class RelatedWorks {
+    public class RelatedWorks {
         public Integer id;
         public String title;
         public String type;
