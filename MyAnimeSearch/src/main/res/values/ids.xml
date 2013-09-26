@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="anime_info_header" type="id" />
+    <item name="anime_synopsis_header" type="id" />
+    <item name="anime_related_header" type="id" />
+    <item name="anime_characters_header" type="id" />
+    <item name="anime_staff_header" type="id" />
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/groupToggleIcon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="false"
+        android:padding="10dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_find_next_holo_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/animeGroupNames"
+        android:layout_alignBottom="@+id/groupToggleIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/groupToggleIcon"
+        android:padding="10dp"
+        android:gravity="left" />
+</RelativeLayout>
