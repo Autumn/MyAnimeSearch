@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
-import android.widget.TextView;
 
 import uguu.gao.wafu.javaMAL.AnimeResult;
 
@@ -69,7 +67,7 @@ public class AnimeSingleResultExpandableListAdapter extends BaseExpandableListAd
         String header = groupNames[groupPosition];
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.anime_single_group, null);
+            convertView = inflater.inflate(R.layout.toggle_heading, null);
         }
        // TextView label = (TextView) convertView.findViewById(R.id.anime_expandableOption);
        // label.setText(header);
