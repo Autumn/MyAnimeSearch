@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/groupToggleIcon"
+        android:id="@+id/headingButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="false"
         android:padding="10dp"
@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/animeGroupNames"
-        android:layout_alignBottom="@+id/groupToggleIcon"
+        android:id="@+id/headingText"
+        android:layout_alignBottom="@+id/headingButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/groupToggleIcon"
+        android:layout_toRightOf="@+id/headingButton"
         android:padding="10dp"
         android:gravity="left" />
 </RelativeLayout>
