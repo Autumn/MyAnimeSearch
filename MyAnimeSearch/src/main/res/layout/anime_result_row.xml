@@ -38,4 +38,16 @@
         android:layout_alignParentRight="true"
         android:gravity="right" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#010101"
+        android:alpha="0.5"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/animeTitle"
+        android:visibility="visible" />
+
 </RelativeLayout>

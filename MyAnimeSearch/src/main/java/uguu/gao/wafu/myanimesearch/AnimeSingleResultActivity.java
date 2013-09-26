@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -50,6 +52,22 @@ public class AnimeSingleResultActivity extends Activity {
             imageLoader.displayImage(imageUrl, thumb, options);
             thumb.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
+
+            TextView title = (TextView) findViewById(R.id.animeTitle);
+            title.setVisibility(View.VISIBLE);
+            title.setText(result.getTitle());
+
+            TextView type = (TextView) findViewById(R.id.animeType);
+            type.setVisibility(View.VISIBLE);
+            type.setText(result.getType());
+
+            //TextView synopsis = (TextView) findViewById(R.id.animeSynopsis);
+            // synopsis.setVisibility(View.VISIBLE);
+            //synopsis.setText(result.getSynopsis());
+
+            WebView synopsis = (WebView) findViewById(R.id.animeSynopsis);
+            synopsis.setVisibility(View.VISIBLE);
+            synopsis.loadData(result.getSynopsis(), "text/html", null);
         }
 
     }
