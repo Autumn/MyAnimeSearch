@@ -32,12 +32,12 @@ abstract class ToggleItem {
 
     int indexOfParent;
 
-    public ToggleItem(Context context, final ToggleListView tlv, int containerLayoutId, String headingText) {
+    public ToggleItem(Context context, final ToggleListView tlv, int containerLayoutId, int headingLayoutId, String headingText) {
         this.context = context;
 
         this.tlv = tlv;
         vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        headingView = vi.inflate(R.layout.toggle_heading, null);
+        headingView = vi.inflate(headingLayoutId, null);
         toggle = (ImageView) headingView.findViewById(R.id.headingButton);
         toggle.setHapticFeedbackEnabled(true);
 
@@ -102,7 +102,7 @@ class ToggleListView extends View  {
         super(context, attrs);
         LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rootView = layout;
-        rootView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        //rootView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         toggles = new ArrayList<ToggleItem>();
     }
 

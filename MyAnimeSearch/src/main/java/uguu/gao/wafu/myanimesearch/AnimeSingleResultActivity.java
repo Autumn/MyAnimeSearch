@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import uguu.gao.wafu.javaMAL.AnimeResult;
 import uguu.gao.wafu.javaMAL.AnimeSearch;
 import uguu.gao.wafu.javaMAL.CharactersAnime;
+import uguu.gao.wafu.javaMAL.People;
+import uguu.gao.wafu.javaMAL.SeiyuuEmbedded;
 import uguu.gao.wafu.javaMAL.StaffEmbedded;
 
 /**
@@ -70,17 +72,13 @@ public class AnimeSingleResultActivity extends Activity {
             imageLoader.displayImage(imageUrl, thumb, options);
             thumb.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-
             TextView title = (TextView) findViewById(R.id.animeTitle);
             title.setVisibility(View.VISIBLE);
             title.setText(result.getTitle());
 
-            //LinearLayout layout = (LinearLayout) findViewById(R.id.animeHeaders);
-
-
             ToggleListView tlv = new ToggleListView(getApplicationContext(), null, (LinearLayout) findViewById(R.id.animeHeaders));
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_info, "Information") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_info, R.layout.toggle_heading, "Information") {
                 void createContainerView() {
                     TextView type = (TextView) containerView.findViewById(R.id.animeType);
                     TextView episodes = (TextView) containerView.findViewById(R.id.animeEpisodes);
@@ -97,31 +95,41 @@ public class AnimeSingleResultActivity extends Activity {
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_synopsis, "Synopsis") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_synopsis, R.layout.toggle_heading, "Synopsis") {
                 void createContainerView() {
                     WebView synopsis = (WebView) containerView.findViewById(R.id.animeSynopsis);
                     synopsis.loadData(result.getSynopsis(), "text/html", null);
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_related, "Related Works") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_related, R.layout.toggle_heading, "Related Works") {
                 void createContainerView() {
 
                     for (AnimeResult.RelatedWorks r : result.getRelatedStories()) {
-                        RelativeLayout relatedAnimeRow = (RelativeLayout) vi.inflate(R.layout.anime_single_related_row, null);
-                        TextView type = (TextView) relatedAnimeRow.findViewById(R.id.relatedAnimeType);
-                        TextView title = (TextView) relatedAnimeRow.findViewById(R.id.relatedAnimeTitle);
+                        RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_related_row, null);
+                        TextView type = (TextView) row.findViewById(R.id.relatedAnimeType);
+                        TextView title = (TextView) row.findViewById(R.id.relatedAnimeTitle);
                         type.setText(r.type);
                         title.setText(r.title);
-                        containerView.addView(relatedAnimeRow);
+                        final ImageView button = (ImageView) row.findViewById(R.id.searchRelatedButton);
+                        button.setHapticFeedbackEnabled(true);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                            }
+                        });
+
+
+                        containerView.addView(row);
                     }
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_characters, "Characters") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_characters, R.layout.toggle_heading, "Characters") {
                 void createContainerView() {
 
-                    for (CharactersAnime c : result.getCharacters()) {
+                    for (final CharactersAnime c : result.getCharacters()) {
                         RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_characters_row, null);
                         TextView name = (TextView) row.findViewById(R.id.charName);
                         TextView role = (TextView) row.findViewById(R.id.charRole);
@@ -138,12 +146,64 @@ public class AnimeSingleResultActivity extends Activity {
                         imageLoader.displayImage(imageUrl, image, options);
                         image.setScaleType(ImageView.ScaleType.FIT_START);
 
+                        final ImageView button = (ImageView) row.findViewById(R.id.searchCharButton);
+                        button.setHapticFeedbackEnabled(true);
+
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+
+                            }
+                        });
+
+
+                        LinearLayout seiyuuLayout = (LinearLayout) row.findViewById(R.id.seiyuuLayout);
+
+                        ToggleListView seiyuuView = new ToggleListView(context, null, seiyuuLayout);
+                        // TODO change toggle heading to switchable layout resource - anime_seiyuu_dropdown_row
+                        seiyuuView.addItem(new ToggleItem(getApplicationContext(), seiyuuView, R.layout.anime_single_seiyuus, R.layout.toggle_heading, "VAs") {
+                            @Override
+                            void createContainerView() {
+                                for (SeiyuuEmbedded p : c.getSeiyuus()) {
+                                    RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_seiyuu_row, null);
+                                    TextView name = (TextView) row.findViewById(R.id.seiyuuName);
+                                    TextView nation = (TextView) row.findViewById(R.id.seiyuuNation);
+                                    ImageView image = (ImageView) row.findViewById(R.id.seiyuuImage);
+
+                                    final ImageView button = (ImageView) row.findViewById(R.id.searchSeiyuuButton);
+                                    button.setHapticFeedbackEnabled(true);
+
+                                    button.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+
+                                        }
+                                    });
+
+
+                                    name.setText(p.getName());
+                                    nation.setText(p.getNation());
+
+                                    ImageLoader imageLoader = ImageLoader.getInstance();
+                                    String imageUrl = p.getThumbUrl();
+                                    DisplayImageOptions options = new DisplayImageOptions.Builder()
+                                            .cacheInMemory(true).imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2).build();
+                                    imageLoader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
+                                    imageLoader.displayImage(imageUrl, image, options);
+                                    image.setScaleType(ImageView.ScaleType.FIT_START);
+                                    containerView.addView(row);
+                                }
+                            }
+                        });
+                        seiyuuView.addViews();
                         containerView.addView(row);
                     }
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_staff, "Staff") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_staff, R.layout.toggle_heading, "Staff") {
                 void createContainerView() {
 
                     for (StaffEmbedded p : result.getStaff()) {
@@ -151,6 +211,18 @@ public class AnimeSingleResultActivity extends Activity {
                         TextView name = (TextView) row.findViewById(R.id.staffName);
                         TextView role = (TextView) row.findViewById(R.id.staffRole);
                         ImageView image = (ImageView) row.findViewById(R.id.staffImage);
+
+                        final ImageView button = (ImageView) row.findViewById(R.id.searchStaffButton);
+                        button.setHapticFeedbackEnabled(true);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+
+                            }
+                        });
+
+
 
                         name.setText(p.getName());
                         role.setText(p.getRole());

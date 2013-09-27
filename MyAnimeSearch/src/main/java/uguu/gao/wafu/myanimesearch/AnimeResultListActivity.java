@@ -33,8 +33,7 @@ public class AnimeResultListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultlist);
         Searcher searcher = Searcher.instanceOf();
-        animeAdapter = new AnimeResultsAdapter(getApplicationContext(),
-                    R.layout.anime_result_row, searcher.getAnimeSearchResults());
+        animeAdapter = new AnimeResultsAdapter(getApplicationContext(), R.layout.anime_result_row, searcher.getAnimeSearchResults());
         setListAdapter(animeAdapter);
     }
 
@@ -78,19 +77,13 @@ public class AnimeResultListActivity extends ListActivity {
             imageLoader.displayImage(imageUrl, thumb, options);
             thumb.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            TextView type = (TextView) v.findViewById(R.id.animeType);
-            type.setText(anime.getType());
-
-            /*TextView airingDates = (TextView) v.findViewById(R.id.animeDate);
-            airingDates.setText(anime.getStartDate() + " - " + anime.getEndDate());*/
-
-            v.setOnTouchListener(new View.OnTouchListener() {
+            ImageView searchSelect = (ImageView) v.findViewById(R.id.searchSelect);
+            searchSelect.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
+                public void onClick(View view) {
                     Intent intent = new Intent(cxt, AnimeSingleResultActivity.class);
                     intent.putExtra("id", anime.getId());
                     startActivity(intent);
-                    return false;
                 }
             });
 
