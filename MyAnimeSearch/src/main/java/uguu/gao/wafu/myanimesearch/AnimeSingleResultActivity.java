@@ -75,10 +75,13 @@ public class AnimeSingleResultActivity extends Activity {
             title.setVisibility(View.VISIBLE);
             title.setText(result.getTitle());
 
-            ToggleListView tlv = new ToggleListView(getApplicationContext(), null);
+            //LinearLayout layout = (LinearLayout) findViewById(R.id.animeHeaders);
+
+
+            ToggleListView tlv = new ToggleListView(getApplicationContext(), null, (LinearLayout) findViewById(R.id.animeHeaders));
 
             tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_info, "Information") {
-                void onToggleOn() {
+                void createContainerView() {
                     TextView type = (TextView) containerView.findViewById(R.id.animeType);
                     TextView episodes = (TextView) containerView.findViewById(R.id.animeEpisodes);
                     TextView status = (TextView) containerView.findViewById(R.id.animeStatus);
@@ -95,16 +98,14 @@ public class AnimeSingleResultActivity extends Activity {
             });
 
             tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_synopsis, "Synopsis") {
-                void onToggleOn() {
-                    View infoView = vi.inflate(R.layout.anime_single_synopsis, null);
-                    WebView synopsis = (WebView) infoView.findViewById(R.id.animeSynopsis);
+                void createContainerView() {
+                    WebView synopsis = (WebView) containerView.findViewById(R.id.animeSynopsis);
                     synopsis.loadData(result.getSynopsis(), "text/html", null);
                 }
             });
 
             tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_related, "Related Works") {
-                void onToggleOn() {
-                    LinearLayout infoView = (LinearLayout) vi.inflate(R.layout.anime_single_related, null);
+                void createContainerView() {
 
                     for (AnimeResult.RelatedWorks r : result.getRelatedStories()) {
                         RelativeLayout relatedAnimeRow = (RelativeLayout) vi.inflate(R.layout.anime_single_related_row, null);
@@ -112,18 +113,16 @@ public class AnimeSingleResultActivity extends Activity {
                         TextView title = (TextView) relatedAnimeRow.findViewById(R.id.relatedAnimeTitle);
                         type.setText(r.type);
                         title.setText(r.title);
-                        infoView.addView(relatedAnimeRow);
+                        containerView.addView(relatedAnimeRow);
                     }
-
                 }
             });
 
             tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_characters, "Characters") {
-                void onToggleOn() {
-                    LinearLayout infoView = (LinearLayout) vi.inflate(R.layout.anime_single_related, null);
+                void createContainerView() {
 
                     for (CharactersAnime c : result.getCharacters()) {
-                        RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_characters_row,null);
+                        RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_characters_row, null);
                         TextView name = (TextView) row.findViewById(R.id.charName);
                         TextView role = (TextView) row.findViewById(R.id.charRole);
                         ImageView image = (ImageView) row.findViewById(R.id.charImage);
@@ -139,14 +138,13 @@ public class AnimeSingleResultActivity extends Activity {
                         imageLoader.displayImage(imageUrl, image, options);
                         image.setScaleType(ImageView.ScaleType.FIT_START);
 
-                        infoView.addView(row);
+                        containerView.addView(row);
                     }
                 }
             });
 
             tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_staff, "Staff") {
-                void onToggleOn() {
-                    LinearLayout infoView = (LinearLayout) vi.inflate(R.layout.anime_single_related, null);
+                void createContainerView() {
 
                     for (StaffEmbedded p : result.getStaff()) {
                         RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_staff_row, null);
@@ -165,11 +163,13 @@ public class AnimeSingleResultActivity extends Activity {
                         imageLoader.displayImage(imageUrl, image, options);
                         image.setScaleType(ImageView.ScaleType.FIT_START);
 
-                        infoView.addView(row);
+                        containerView.addView(row);
                     }
                 }
             });
-            ((LinearLayout) findViewById(R.id.animeSingleLayout)).addView(tlv.getContainerView());
+            //((LinearLayout) findViewById(R.id.animeHeaders)).addView(tlv.getContainerView());
+            tlv.addViews();
+
         }
     }
 }

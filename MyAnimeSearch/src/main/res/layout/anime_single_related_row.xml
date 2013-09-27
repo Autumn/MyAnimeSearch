@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,5 +25,6 @@
         android:id="@+id/relatedAnimeType"
         android:layout_below="@+id/relatedAnimeTitle"
         android:layout_alignParentLeft="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColor="#000000" />
 </RelativeLayout>
