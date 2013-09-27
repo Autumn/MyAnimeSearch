@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -77,10 +78,15 @@ public class AnimeResultListActivity extends ListActivity {
             imageLoader.displayImage(imageUrl, thumb, options);
             thumb.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            ImageView searchSelect = (ImageView) v.findViewById(R.id.searchSelect);
+
+
+            final ImageView searchSelect = (ImageView) v.findViewById(R.id.searchSelect);
+            searchSelect.setHapticFeedbackEnabled(true);
+
             searchSelect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    searchSelect.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                     Intent intent = new Intent(cxt, AnimeSingleResultActivity.class);
                     intent.putExtra("id", anime.getId());
                     startActivity(intent);

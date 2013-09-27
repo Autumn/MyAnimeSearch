@@ -67,7 +67,7 @@ public class AnimeSingleResultExpandableListAdapter extends BaseExpandableListAd
         String header = groupNames[groupPosition];
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.toggle_heading, null);
+            convertView = inflater.inflate(R.layout.toggle_heading_left, null);
         }
        // TextView label = (TextView) convertView.findViewById(R.id.anime_expandableOption);
        // label.setText(header);

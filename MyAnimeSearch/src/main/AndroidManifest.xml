@@ -44,6 +44,10 @@
             android:label="@string/title_activity_result_list"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".AnimeSingleResultActivity"
+            android:parentActivityName=".AnimeResultListActivity">
+        </activity>
+
         <activity
             android:name="uguu.gao.wafu.myanimesearch.CharResultListActivity"
             android:label="@string/title_activity_result_list"
@@ -54,8 +58,12 @@
             android:label="@string/title_activity_result_list"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".AnimeResultScrollerActivity" />
-        <activity android:name=".AnimeSingleResultActivity" />
+        <activity
+            android:name="uguu.gao.wafu.myanimesearch.PersonSingleResultActivity"
+            android:label="@string/title_activity_result_list"
+            android:parentActivityName=".PeopleResultListActivity">
+        </activity>
+
     </application>
 
 </manifest>
