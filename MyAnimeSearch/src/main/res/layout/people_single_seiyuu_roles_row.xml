@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/animeName"
+        android:padding="10dp"
+        android:gravity="right"
+        android:maxLines="5"
+        android:scrollbars="horizontal"
+        android:textColor="#000000"
+        android:layout_toLeftOf="@+id/searchPersonAnimeButton"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/animeImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/animeName"
+        android:padding="10dp"
+        android:scaleType="fitStart" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchPersonAnimeButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/animeName"
+        android:src="@drawable/ic_btn_search_go" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/characterHeading"
+        android:layout_below="@+id/animeName"></LinearLayout>
+
+</RelativeLayout>

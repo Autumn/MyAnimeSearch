@@ -1,13 +1,10 @@
 package uguu.gao.wafu.myanimesearch;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -21,12 +18,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
-import java.util.ArrayList;
-
 import uguu.gao.wafu.javaMAL.AnimeResult;
 import uguu.gao.wafu.javaMAL.AnimeSearch;
 import uguu.gao.wafu.javaMAL.CharactersAnime;
-import uguu.gao.wafu.javaMAL.People;
 import uguu.gao.wafu.javaMAL.SeiyuuEmbedded;
 import uguu.gao.wafu.javaMAL.StaffEmbedded;
 
@@ -34,13 +28,6 @@ import uguu.gao.wafu.javaMAL.StaffEmbedded;
  * Created by aki on 14/09/13.
  */
 public class AnimeSingleResultActivity extends Activity {
-
-    String[] groupNames = {"Information", "Synopsis", "Related Works", "Characters", "Staff"};
-    boolean informationToggleSet = false;
-    boolean synopsisToggleSet = false;
-    boolean relatedToggleSet = false;
-    boolean charactersToggleSet = false;
-    boolean staffToggleSet = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +65,7 @@ public class AnimeSingleResultActivity extends Activity {
 
             ToggleListView tlv = new ToggleListView(getApplicationContext(), null, (LinearLayout) findViewById(R.id.animeHeaders));
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_info, R.layout.toggle_heading, "Information") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_info, R.layout.toggle_heading_left, "Information") {
                 void createContainerView() {
                     TextView type = (TextView) containerView.findViewById(R.id.animeType);
                     TextView episodes = (TextView) containerView.findViewById(R.id.animeEpisodes);
@@ -95,14 +82,14 @@ public class AnimeSingleResultActivity extends Activity {
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_synopsis, R.layout.toggle_heading, "Synopsis") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_synopsis, R.layout.toggle_heading_left, "Synopsis") {
                 void createContainerView() {
                     WebView synopsis = (WebView) containerView.findViewById(R.id.animeSynopsis);
                     synopsis.loadData(result.getSynopsis(), "text/html", null);
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_related, R.layout.toggle_heading, "Related Works") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_related, R.layout.toggle_heading_left, "Related Works") {
                 void createContainerView() {
 
                     for (AnimeResult.RelatedWorks r : result.getRelatedStories()) {
@@ -126,7 +113,7 @@ public class AnimeSingleResultActivity extends Activity {
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_characters, R.layout.toggle_heading, "Characters") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_characters, R.layout.toggle_heading_left, "Characters") {
                 void createContainerView() {
 
                     for (final CharactersAnime c : result.getCharacters()) {
@@ -161,11 +148,11 @@ public class AnimeSingleResultActivity extends Activity {
                         LinearLayout seiyuuLayout = (LinearLayout) row.findViewById(R.id.seiyuuLayout);
 
                         ToggleListView seiyuuView = new ToggleListView(context, null, seiyuuLayout);
-                        // TODO change toggle heading to switchable layout resource - anime_seiyuu_dropdown_row
-                        seiyuuView.addItem(new ToggleItem(getApplicationContext(), seiyuuView, R.layout.anime_single_seiyuus, R.layout.toggle_heading, "VAs") {
+                        // TODO change toggle heading to switchable layout resource - toggle_heading_right
+                        seiyuuView.addItem(new ToggleItem(getApplicationContext(), seiyuuView, R.layout.anime_single_seiyuus, R.layout.toggle_heading_right, "VAs") {
                             @Override
                             void createContainerView() {
-                                for (SeiyuuEmbedded p : c.getSeiyuus()) {
+                                for (final SeiyuuEmbedded p : c.getSeiyuus()) {
                                     RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_seiyuu_row, null);
                                     TextView name = (TextView) row.findViewById(R.id.seiyuuName);
                                     TextView nation = (TextView) row.findViewById(R.id.seiyuuNation);
@@ -178,10 +165,11 @@ public class AnimeSingleResultActivity extends Activity {
                                         @Override
                                         public void onClick(View view) {
                                             button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-
+                                            Intent intent = new Intent(context, PersonSingleResultActivity.class);
+                                            intent.putExtra("id", p.getId());
+                                            startActivity(intent);
                                         }
                                     });
-
 
                                     name.setText(p.getName());
                                     nation.setText(p.getNation());
@@ -203,10 +191,10 @@ public class AnimeSingleResultActivity extends Activity {
                 }
             });
 
-            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_staff, R.layout.toggle_heading, "Staff") {
+            tlv.addItem(new ToggleItem(getApplicationContext(), tlv, R.layout.anime_single_staff, R.layout.toggle_heading_left, "Staff") {
                 void createContainerView() {
 
-                    for (StaffEmbedded p : result.getStaff()) {
+                    for (final StaffEmbedded p : result.getStaff()) {
                         RelativeLayout row = (RelativeLayout) vi.inflate(R.layout.anime_single_staff_row, null);
                         TextView name = (TextView) row.findViewById(R.id.staffName);
                         TextView role = (TextView) row.findViewById(R.id.staffRole);
@@ -218,11 +206,11 @@ public class AnimeSingleResultActivity extends Activity {
                             @Override
                             public void onClick(View view) {
                                 button.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-
+                                Intent intent = new Intent(context, PersonSingleResultActivity.class);
+                                intent.putExtra("id", p.getId());
+                                startActivity(intent);
                             }
                         });
-
-
 
                         name.setText(p.getName());
                         role.setText(p.getRole());
@@ -239,9 +227,7 @@ public class AnimeSingleResultActivity extends Activity {
                     }
                 }
             });
-            //((LinearLayout) findViewById(R.id.animeHeaders)).addView(tlv.getContainerView());
             tlv.addViews();
-
         }
     }
 }
