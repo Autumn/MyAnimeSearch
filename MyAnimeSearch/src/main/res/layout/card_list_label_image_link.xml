@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+
+    android:padding="15dp"
+    android:background="#f1f1f1"
+
+    android:id="@+id/relativeLayout1"
+    android:layout_below="@+id/RelativeLayout"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label Heading"
+        android:id="@+id/heading"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/image"
+        android:maxLines="10"
+        android:layout_toLeftOf="@+id/link"
+        android:layout_alignParentBottom="true"
+        android:gravity="right" />
+
+    <ImageView
+        android:layout_width="21dp"
+        android:layout_height="32dp"
+        android:id="@+id/image"
+        android:src="@drawable/rui_t"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="15dp"
+        android:scaleType="fitStart" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/link"
+        android:layout_gravity="center_vertical|right"
+        android:src="@drawable/ic_find_right_holo_light"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

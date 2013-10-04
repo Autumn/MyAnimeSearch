@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:layout_marginLeft="15dp"
+android:layout_marginTop="15dp"
+android:layout_marginRight="15dp"
+android:padding="15dp"
+    android:background="#f1f1f1"
+
+    android:id="@+id/relativeLayout2"
+android:layout_below="@+id/relativeLayout1"
+    >
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Label Heading"
+    android:id="@+id/heading"
+    android:padding="5dp"
+    android:layout_alignParentTop="true"
+    android:layout_toRightOf="@+id/dropdown"
+    android:textAllCaps="true"
+    android:textSize="16dp" />
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/dropdown"
+    android:src="@drawable/ic_find_next_holo_light"
+    android:layout_alignParentEnd="false"
+    android:layout_alignParentTop="false"
+    android:layout_alignParentBottom="false"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:paddingRight="5dp" />
+
+<View android:layout_width="fill_parent"
+    android:layout_height="2dip"
+    android:background="#deeeee"
+    android:id="@+id/view"
+    android:layout_below="@+id/heading"
+    android:layout_toRightOf="@+id/dropdown"
+    android:visibility="invisible" />
+
+</RelativeLayout>

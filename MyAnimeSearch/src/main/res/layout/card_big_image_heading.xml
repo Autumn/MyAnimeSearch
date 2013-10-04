@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="0dp"
+    android:layout_gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rui Ninomiya"
+        android:id="@+id/heading"
+
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/image"
+        android:padding="10dp"
+        android:maxLines="10"
+        android:textAlignment="center"
+        android:gravity="center" />
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#d3d3d3"
+        android:id="@+id/view"
+        android:layout_alignBottom="@+id/heading" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:longClickable="false"
+        android:src="@drawable/ruirui"
+        android:scaleType="fitStart" />
+</RelativeLayout>

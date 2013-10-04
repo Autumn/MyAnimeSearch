@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#f1f1f1"
+
+    android:padding="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="15dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dropdown"
+        android:src="@drawable/ic_find_next_holo_light"
+        android:paddingRight="5dp"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="false" />
+
+    <View android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#d3d3d3"
+        android:id="@+id/view"
+        android:layout_below="@+id/heading"
+        android:layout_toRightOf="@+id/dropdown"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/heading"
+        android:layout_toRightOf="@+id/dropdown"
+        android:padding="5dp"
+        android:textSize="20dp"
+        android:textAllCaps="true" />
+</RelativeLayout>
